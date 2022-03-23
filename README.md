@@ -60,9 +60,14 @@ path\to\perfview -KernelEvents:Process -OnlyProviders:*KPathakTrace collect outp
 
 This command will have perfview listen to the `KPathakTrace` events only. Next, launch the app multiple times using `MeasureStartup`.
 
+Alternatively, `MeasureStartup` can directly be launched from `PerfView`, using "Collect -> Run" menu as shown below:
+
+![perfview](perfview.jpg)
+
 # How to see the events?
 
 In perfview, open the `.etl` file "Events" section and you should see events like below:
 
 ![appevents](appevents.jpg)
+
 
