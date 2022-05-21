@@ -6,7 +6,7 @@
 MeasureStartup.exe <path_to_exe> <args_to_exe> <iterations> <delay_in_secs>
 ```
 
-A small utility that can measure the startup time of a UI .NET application by sending events of the form `*KpathakTrace`. It launches the given application and launches it `iterations` times. It closes the application after `delay_in_secs` seconds before launching the next time. As soon as it launches the application, it emits the `KpathakTrace/AppLaunched` event. This event can then be correlated to the corresponding `AppStarted` event (details below) that will be emitted by the application itself. `AppStarted - AppLaunched` should give approxiamate duration to start the application, including but not limited to assembly loading and JITting the methods.
+A small utility that can measure the startup time of a UI .NET application by sending events of the form `*PaintDotnetTrace`. It launches the given application and launches it `iterations` times. It closes the application after `delay_in_secs` seconds before launching the next time. As soon as it launches the application, it emits the `PaintDotnetTrace/AppLaunched` event. This event can then be correlated to the corresponding `AppStarted` event (details below) that will be emitted by the application itself. `AppStarted - AppLaunched` should give approxiamate duration to start the application, including but not limited to assembly loading and JITting the methods.
 
 # How to use it?
 
@@ -16,9 +16,9 @@ The application that needs to be profiled will also need to add below code of `E
 using System;
 using System.Diagnostics.Tracing;
 
-namespace PaintDotNet.KpathakEvents;
+namespace PaintDotNet.PaintDotnetEvents;
 
-[EventSource(Name = "KPathakTrace")]
+[EventSource(Name = "PaintDotnetTrace")]
 public sealed class AppEventSource : EventSource
 {
 #pragma warning disable CA2211 // Non-constant fields should not be visible
@@ -55,10 +55,10 @@ You need to have `PerfView` installed. There might be other ways to measure it, 
 Execute the following command:
 
 ```
-path\to\perfview -KernelEvents:Process -OnlyProviders:*KPathakTrace collect outputfile.etl
+path\to\perfview -KernelEvents:Process -OnlyProviders:*PaintDotnetTrace collect outputfile.etl
 ```
 
-This command will have perfview listen to the `KPathakTrace` events only. Next, launch the app multiple times using `MeasureStartup`.
+This command will have perfview listen to the `PaintDotnetTrace` events only. Next, launch the app multiple times using `MeasureStartup`.
 
 Alternatively, `MeasureStartup` can directly be launched from `PerfView`, using "Collect -> Run" menu as shown below:
 

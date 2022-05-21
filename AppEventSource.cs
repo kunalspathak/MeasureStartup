@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.Tracing;
 
-[EventSource(Name = "KPathakTrace")]
+[EventSource(Name = "PaintDotnetTrace")]
 public sealed class AppEventSource : EventSource
 {
     public static AppEventSource Log = new AppEventSource();
